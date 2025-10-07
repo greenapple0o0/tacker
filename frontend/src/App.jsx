@@ -5,22 +5,32 @@ import Scoreboard from "./components/Scoreboard";
 import Countdown from "./components/Countdown";
 import axios from "axios";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 export default function App() {
   const [trackerData, setTrackerData] = useState(null);
 
   const fetchData = async () => {
-    const res = await axios.get("https://tracker-6zxo.onrender.com");
-    setTrackerData(res.data);
+    try {
+      const res = await axios.get(API_BASE);
+      setTrackerData(res.data);
+    } catch (err) {
+      console.error("Failed to fetch tracker data:", err);
+    }
+  };
+
+  const resetData = async () => {
+    try {
+      await axios.post(`${API_BASE}/reset`);
+      fetchData();
+    } catch (err) {
+      console.error("Failed to reset data:", err);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const resetData = async () => {
-    await axios.post("https://tracker-6zxo.onrender.com");
-    fetchData();
-  };
 
   if (!trackerData) return <div>Loading...</div>;
 
