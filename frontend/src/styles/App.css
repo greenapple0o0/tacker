@@ -1,0 +1,38 @@
+.app-container {
+  max-width: 800px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.water-tracker .person {
+  margin-bottom: 20px;
+}
+
+.glass {
+  font-size: 24px;
+  margin: 2px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.glass.full {
+  opacity: 1;
+}
+
+button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
