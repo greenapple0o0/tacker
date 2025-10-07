@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function Checklist({ tasks, refresh }) {
   const toggleTask = async (id, person) => {
-    await axios.post(`http://localhost:5000/api/tracker/task/${id}/${person}`);
+    await axios.post(`https://tracker-6zxo.onrender.com${id}/${person}`);
     refresh();
   };
 

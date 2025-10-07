@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function WaterTracker({ water, refresh }) {
   const addGlass = async (person) => {
-    await axios.post(`http://localhost:5000/api/tracker/water/${person}`);
+    await axios.post(`https://tracker-6zxo.onrender.com${person}`);
     refresh();
   };
 

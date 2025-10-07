@@ -9,7 +9,7 @@ export default function App() {
   const [trackerData, setTrackerData] = useState(null);
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5000/api/tracker");
+    const res = await axios.get("https://tracker-6zxo.onrender.com");
     setTrackerData(res.data);
   };
 
@@ -18,7 +18,7 @@ export default function App() {
   }, []);
 
   const resetData = async () => {
-    await axios.post("http://localhost:5000/api/tracker/reset");
+    await axios.post("https://tracker-6zxo.onrender.com");
     fetchData();
   };
 
