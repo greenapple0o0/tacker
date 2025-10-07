@@ -4,33 +4,36 @@ export default function Countdown({ lastReset, onReset }) {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const calculateTime = () => {
-      const nextReset = new Date(lastReset);
-      nextReset.setDate(nextReset.getDate() + 1);
-      return Math.max(0, nextReset - new Date());
+    const updateCountdown = () => {
+      const now = new Date();
+      const resetTime = new Date(lastReset);
+      resetTime.setDate(resetTime.getDate() + 1);
+      const diff = resetTime - now;
+      if (diff <= 0) {
+        onReset();
+      } else {
+        setTimeLeft(diff);
+      }
     };
 
-    setTimeLeft(calculateTime());
-
-    const interval = setInterval(() => {
-      const t = calculateTime();
-      setTimeLeft(t);
-
-      if (t <= 0) {
-        onReset();
-      }
-    }, 1000);
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     return () => clearInterval(interval);
   }, [lastReset, onReset]);
 
   const formatTime = (ms) => {
     const totalSeconds = Math.floor(ms / 1000);
-    const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-    const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-    const s = String(totalSeconds % 60).padStart(2, "0");
-    return `${h}:${m}:${s}`;
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    return `${h}h ${m}m ${s}s`;
   };
 
-  return <div className="countdown">Time until reset: {formatTime(timeLeft)}</div>;
+  return (
+    <div className="countdown">
+      <h2>Time left until next reset:</h2>
+      <div>{formatTime(timeLeft)}</div>
+    </div>
+  );
 }

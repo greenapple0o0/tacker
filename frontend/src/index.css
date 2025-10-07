@@ -1,12 +1,12 @@
-/* Example basic styling */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f0f2f5;
 }
 
 .app-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center;
 }
